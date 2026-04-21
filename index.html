@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portofolio - Dodi</title>
+
+  <!-- Tambahkan Google Fonts di sini -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Favicon untuk desktop browser -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon_16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon_32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/icons/favicon_48.png" />
+    <link rel="icon" type="image/x-icon" href="/icons/favicon.ico" />
+    
+    <!-- Apple Touch Icon (untuk iOS & Safari) -->
+    <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple_touch_120.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple_touch_152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple_touch_180.png" />
+    <link rel="apple-touch-icon" sizes="167x167" href="/icons/ios_167.png" />
+    <link rel="apple-touch-icon" sizes="1024x1024" href="/icons/ios_1024.png" />
+    
+    <!-- Android / PWA manifest -->
+    <link rel="manifest" href="/icons/manifest.json" />
+    
+    <!-- Android splash / background -->
+    <meta name="theme-color" content="#000000" />
+    <meta name="background_color" content="#000000" />
+    
+    <!-- ===== Tambahan CSS Global untuk Navbar Firefox ===== -->
+    <style>
+      /* Pastikan html dan body selalu setinggi viewport penuh */
+      html,
+      body {
+        height: 100%;
+        min-height: 100%;
+      }
+    
+      /* Fallback khusus Firefox agar navbar fixed tidak ikut “hilang” */
+      @supports (-moz-appearance: none) {
+        .navbar-fix {
+          position: sticky;
+          top: 0.5rem;
+          /* sama seperti top-2 */
+        }
+      }
+    </style>
+    <!-- ================================================ -->
+
+  </head>
+  <body class="bg-neutral-950 text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

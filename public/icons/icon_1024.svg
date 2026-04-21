@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <rect width="1024" height="1024" rx="184" ry="184" fill="#1f2937"/>
+  <rect x="72" y="72" width="880" height="880" rx="140" ry="140" fill="none" stroke="#ffffff22" stroke-width="60"/>
+  <!-- stylized D: vertical bar -->
+  <rect x="276.47999999999996" y="225.28" width="143.36" height="573.44" rx="71.68" fill="#fff"/>
+  <!-- curved part -->
+  <path d="M 532.48 225.28 A 368.64 286.72 0 0 1 532.48 798.72 L 532.48 798.72 A 286.72 204.8 0 0 0 532.48 225.28 Z" fill="#fff"/>
+</svg>
