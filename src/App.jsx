@@ -23,8 +23,8 @@ import logo from "./assets/Logo_profile.png";
 import emailjs from "@emailjs/browser";
 
 // ================= DATABASE =================
-import { db } from "./firebase";
-import { doc, getDoc, updateDoc, setDoc, increment } from "firebase/firestore";
+// import { db } from "./firebase";
+// import { doc, getDoc, updateDoc, setDoc, increment } from "firebase/firestore";
 
 // ================= ICONS (FONT AWESOME) =================
 import {
@@ -150,7 +150,7 @@ export default function App() {
       "Menyusun laporan evaluasi pelatihan secara berkala sebagai bahan monitoring dan pengambilan keputusan.",
       "Memberikan rekomendasi strategis untuk peningkatan kualitas dan efektivitas program pelatihan berdasarkan hasil analisis data.",
     ],
-    // certificate: "/certificates/"
+    certificate: "/certificates/PPSDMPU.pdf"
   },
   {
     role: "Business Consultant",
@@ -184,24 +184,14 @@ export default function App() {
 
 const certificatesData = [
   {
-    title: "Data Science Certificate",
-    logo: "/logos/Dicoding.png",
-    file: "/certificates/DataScience_Dicoding.pdf",
-  },
-  {
-    title: "Python Certificate",
-    logo: "/logos/Dicoding.png",
-    file: "/certificates/Python_Dicoding.pdf",
-  },
-  {
-    title: "SQL Certificate",
-    logo: "/logos/Dicoding.png",
-    file: "/certificates/SQL_Dicoding.pdf",
-  },
-  {
     title: "Computer Algorithm Competency Certificate",
     logo: "/logos/UBL.png",
     file: "/certificates/Algoritma.pdf",
+  },
+  {
+    title: "Seminar Nasional Mahasiswa Fakultas Teknologi Informasi Certificate",
+    logo: "/logos/UBL.png",
+    file: "/certificates/SENAFTI.pdf",
   },
   {
     title: "Magang dan Studi Independen Certificate",
@@ -209,15 +199,32 @@ const certificatesData = [
     file: "/certificates/SI.pdf",
   },
   {
-    title: "Kotlin Certificate",
+    title: "Pengolah Data dan Monitoring Evaluasi Pelatihan Certificate",
+    logo: "/logos/Perhubungan.png",
+    file: "/certificates/PPSDMPU.pdf",
+  },
+
+  {
+    title: "Data Science Certificate",
     logo: "/logos/Dicoding.png",
-    file: "/certificates/Kotlin_Dicoding.pdf",
+    file: "/certificates/DataScience_Dicoding.pdf",
+  },
+  {
+    title: "SQL Certificate",
+    logo: "/logos/Dicoding.png",
+    file: "/certificates/SQL_Dicoding.pdf",
+  },
+  {
+    title: "Python Certificate",
+    logo: "/logos/Dicoding.png",
+    file: "/certificates/Python_Dicoding.pdf",
   },
   {
     title: "JavaScript Certificate",
     logo: "/logos/Dicoding.png",
     file: "/certificates/Javascript_Dicoding.pdf",
   },
+  
   {
     title: "Pemrograman Web Certificate",
     logo: "/logos/Dicoding.png",
@@ -229,10 +236,16 @@ const certificatesData = [
     file: "/certificates/FrontEnd_Dicoding.pdf",
   },
   {
+    title: "Kotlin Certificate",
+    logo: "/logos/Dicoding.png",
+    file: "/certificates/Kotlin_Dicoding.pdf",
+  },
+  {
     title: "HTML & CSS Certificate",
     logo: "/logos/Progate.png",
     file: "/certificates/HTML&CSS.pdf",
   },
+  
   {
     title: "Toefl Test Prediction Certificate",
     logo: "/logos/Webster.jpg",
@@ -263,8 +276,8 @@ const displayCertificates = isMobile
   return () => clearInterval(interval);
 }, []);
 
-  const [visitors, setVisitors] = useState(0);
-  const [displayVisitors, setDisplayVisitors] = useState(0);
+  // const [visitors, setVisitors] = useState(0);
+  // const [displayVisitors, setDisplayVisitors] = useState(0);
   
   // ✅ useEffect scroll (TETAP)
   useEffect(() => {
@@ -276,6 +289,7 @@ const displayCertificates = isMobile
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  /*
   useEffect(() => {
   const updateVisitor = async () => {
     try {
@@ -310,6 +324,7 @@ const displayCertificates = isMobile
 
   updateVisitor();
 }, []);
+*/
 
   // useEffect animasi counter (Visitors) - DISABLE DULU
   /*
@@ -892,17 +907,66 @@ if (loading) {
         </ul>
 
         {exp.certificate && (
-          <div className="mt-2">
-            <a
-              href={exp.certificate}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-cyan-400 underline hover:text-cyan-300 text-sm"
+          <motion.div
+            whileHover={{
+              scale: 1.02,
+              boxShadow: "0px 0px 20px rgba(34,211,238,0.35)",
+            }}
+          whileTap={{ scale: 0.98 }}
+          onClick={() =>
+            setSelectedCert({
+              title: `${exp.role} Certificate`,
+              file: exp.certificate,
+            })
+          }
+          className="
+            mt-5 relative overflow-hidden
+            bg-gradient-to-br from-cyan-400/10 to-blue-500/10
+            border border-cyan-400/20
+            rounded-xl px-4 py-4
+            cursor-pointer
+            group
+            transition duration-300
+          hover:border-cyan-400/60
+            "
             >
-              View Certificate
-            </a>
+          {/* Glow Hover */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent blur-2xl"></div>
+            </div>
+
+          <div className="relative z-10 flex items-center justify-between">
+            {/* LEFT */}
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-lg bg-cyan-400/20 flex items-center justify-center text-cyan-400 text-2xl">
+                📜
+              </div>
+
+              <div>
+                <h4 className="text-cyan-400 font-semibold text-sm md:text-base">
+                  Professional Certificate
+                </h4>
+
+              <p className="text-gray-400 text-xs md:text-sm">
+                Click to preview certificate
+              </p>
+            </div>
           </div>
-        )}
+
+            {/* RIGHT */}
+              <motion.div
+                animate={{ x: [0, 5, 0] }}
+                transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                }}
+                className="text-cyan-400 text-xl"
+              >
+              →
+          </motion.div>
+        </div>
+      </motion.div>
+    )}
       </div>
     </motion.div>
     ))}
@@ -997,200 +1061,431 @@ if (loading) {
     </p>
 
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+
       {/* Project 1 */}
       <motion.div
-        className="bg-black/40 rounded-xl overflow-hidden shadow-lg cursor-pointer backdrop-blur-sm"
-        whileHover={{ 
-          y: -8, 
-          scale: 1.02,
-          boxShadow: "0px 0px 30px rgba(0,255,255,0.6)"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        whileHover={{
+          y: -6,
+          boxShadow: "0px 0px 25px rgba(34,211,238,0.35)",
         }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="
+          group relative
+        bg-neutral-900/60
+          backdrop-blur-md
+          border border-cyan-400/20
+          rounded-2xl
+          overflow-hidden
+          transition duration-300
+          hover:border-cyan-400
+        "
       >
+
+        {/* Glow Hover */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent blur-2xl"></div>
+        </div>
+
+        {/* IMAGE */}
         <div className="w-full aspect-video overflow-hidden">
-          <motion.img
+          <img
             src="/projects/covid-dashboard.jpg"
             alt="COVID-19 Dashboard"
-            className="w-full h-full object-cover"
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.4 }}
+            className="w-full h-full object-cover transition duration-500 hover:scale-105"
           />
         </div>
+
+        {/* CONTENT */}
         <div className="p-6">
-          <h3 className="font-semibold text-xl mb-3">COVID-19 Dashboard</h3>
-          <p className="text-gray-400 mb-4">
-            An interactive COVID-19 dashboard for Indonesia, visualizing confirmed cases, daily new cases, and regional distributions using Google Data Studio.
+          <h3 className="text-xl font-semibold text-cyan-400 mb-3">
+            COVID-19 Dashboard
+          </h3>
+
+          <p className="text-sm text-gray-300 leading-relaxed mb-5">
+            Dashboard interaktif COVID-19 untuk Indonesia, yang memvisualisasikan kasus terkonfirmasi, 
+            kasus baru harian, dan distribusi regional menggunakan Google Data Studio.
           </p>
-          <motion.a
-            href="https://lookerstudio.google.com/s/r2ANE4Dtr4w"
-            className="text-cyan-400 text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all"
-            target="_blank"
-            rel="noreferrer"
-            whileHover={{ x: 5 }}
-          >
-            View Project →
-          </motion.a>
+
+        {/* TECH STACK */}
+        <div className="flex flex-wrap gap-2 mb-5">
+          <span className="px-3 py-1 text-xs rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
+            Looker Studio
+          </span>
+
+          <span className="px-3 py-1 text-xs rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
+            Dashboard
+          </span>
+        </div>
+
+        {/* BUTTON */}
+        <motion.a
+          href="https://lookerstudio.google.com/s/r2ANE4Dtr4w"
+          target="_blank"
+          rel="noreferrer"
+          whileHover={{ x: 5 }}
+          transition={{ duration: 0.2 }}
+          className="
+            inline-flex items-center gap-2
+            text-cyan-400
+            hover:gap-3
+            transition-all
+            text-sm font-medium
+          "
+        >
+          View Project →
+        </motion.a>
         </div>
       </motion.div>
 
       {/* Project 2 - Tugas Akhir */}
       <motion.div
-        className="bg-black/40 rounded-xl overflow-hidden shadow-lg cursor-pointer backdrop-blur-sm"
-        whileHover={{ 
-          y: -8, 
-          scale: 1.02,
-          boxShadow: "0px 0px 30px rgba(0,255,255,0.6)"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        whileHover={{
+          y: -6,
+          boxShadow: "0px 0px 25px rgba(34,211,238,0.35)",
         }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="
+          group relative
+          bg-neutral-900/60
+          backdrop-blur-md
+          border border-cyan-400/20
+          rounded-2xl
+          overflow-hidden
+          transition duration-300
+          hover:border-cyan-400
+        "
       >
-        <div className="w-full aspect-video overflow-hidden">
-          <motion.img
-            src="/projects/grafik-apriori.png"
-            alt="Data Mining Bookstore Apriori"
-            className="w-full h-full object-cover"
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.4 }}
-          />
-        </div>
-        <div className="p-6">
-          <h3 className="font-semibold text-xl mb-3">
-            Final Project - Data Mining Apriori Bookstore
-          </h3>
-          <p className="text-gray-400 mb-4 text-sm leading-relaxed">
-            Tugas Akhir yang menerapkan algoritma Apriori untuk menganalisis pola
-            pembelian di toko buku dan menyusun strategi penjualan bundling produk.
-          </p>
-          <motion.a
-            href="https://github.com/Dody21/datamining-bookstore-apriori"
-            className="text-cyan-400 text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all"
-            target="_blank"
-            rel="noreferrer"
-            whileHover={{ x: 5 }}
-          >
-            View Project →
-          </motion.a>
-        </div>
-      </motion.div>
+
+      {/* Glow Hover */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent blur-2xl"></div>
+      </div>
+
+      {/* IMAGE */}
+      <div className="w-full aspect-video overflow-hidden">
+        <img
+          src="/projects/grafik-apriori.png"
+          alt="Data Mining Bookstore Apriori"
+          className="w-full h-full object-cover transition duration-500 hover:scale-105"
+        />
+      </div>
+
+      {/* CONTENT */}
+      <div className="p-6">
+        <h3 className="text-xl font-semibold text-cyan-400 mb-3">
+          Final Project - Data Mining Apriori Bookstore
+        </h3>
+
+        <p className="text-sm text-gray-300 leading-relaxed mb-5">
+          Tugas Akhir yang menerapkan algoritma Apriori untuk
+          menganalisis pola pembelian di toko buku dan menyusun
+          strategi bundling produk.
+        </p>
+
+      {/* TECH STACK */}
+      <div className="flex flex-wrap gap-2 mb-5">
+        <span className="px-3 py-1 text-xs rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
+          Jupyter Notebook
+        </span>
+        
+        <span className="px-3 py-1 text-xs rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
+          RapidMiner
+        </span>
+
+        <span className="px-3 py-1 text-xs rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
+          Algoritme Apriori
+        </span>
+
+        <span className="px-3 py-1 text-xs rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
+          Data Mining
+        </span>
+      </div>
+
+      {/* BUTTON */}
+      <motion.a
+        href="https://github.com/Dody21/datamining-bookstore-apriori"
+        target="_blank"
+        rel="noreferrer"
+        whileHover={{ x: 5 }}
+        transition={{ duration: 0.2 }}
+        className="
+          inline-flex items-center gap-2
+          text-cyan-400
+          hover:gap-3
+          transition-all
+          text-sm font-medium
+        "
+      >
+        View Project →
+      </motion.a>
+    </div>
+  </motion.div>
 
       {/* Project 3 - Final Project MSIB VI */}
       <motion.div
-        className="bg-black/40 rounded-xl overflow-hidden shadow-lg cursor-pointer backdrop-blur-sm"
-        whileHover={{ 
-          y: -8, 
-          scale: 1.02, 
-          boxShadow: "0px 0px 30px rgba(0,255,255,0.6)"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        whileHover={{
+          y: -6,
+          boxShadow: "0px 0px 25px rgba(34,211,238,0.35)",
         }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="
+          group relative
+          bg-neutral-900/60
+          backdrop-blur-md
+          border border-cyan-400/20
+          rounded-2xl
+          overflow-hidden
+          transition duration-300
+          hover:border-cyan-400
+        "
       >
-        <div className="w-full aspect-video overflow-hidden">
-          <motion.img
-            src="/projects/Poster-Iklan-3.png"
-            alt="Digital Marketing Campaign MSIB VI"
-            className="w-full h-full object-cover"
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.4 }}
-          />
-        </div>
-        <div className="p-6">
-          <h3 className="font-semibold text-xl mb-3">
-            Final Project MSIB VI - Digital Marketing Campaign
-          </h3>
-          <p className="text-gray-400 mb-4 text-sm leading-relaxed">
-            Final Project program MSIB VI yang berfokus pada campaign pemasaran digital
-            selama 3 bulan, mencakup data brand, perencanaan campaign, copywriting, dan
-            strategi public speaking.
-          </p>
-          <motion.a
-            href="https://github.com/Dody21/brand-campaign.git"
-            className="text-cyan-400 text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all"
-            target="_blank"
-            rel="noreferrer"
-            whileHover={{ x: 5 }}
-          >
-            View Project →
-          </motion.a>
-        </div>
-      </motion.div>
+
+      {/* Glow Hover */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent blur-2xl"></div>
+      </div>
+
+      {/* IMAGE */}
+      <div className="w-full aspect-video overflow-hidden">
+        <img
+          src="/projects/Poster-Iklan-3.png"
+          alt="Digital Marketing Campaign MSIB VI"
+          className="w-full h-full object-cover transition duration-500 hover:scale-105"
+        />
+      </div>
+
+      {/* CONTENT */}
+      <div className="p-6">
+        <h3 className="text-xl font-semibold text-cyan-400 mb-3">
+          Final Project MSIB VI - Digital Marketing Campaign
+        </h3>
+
+        <p className="text-sm text-gray-300 leading-relaxed mb-5">
+          Final Project program MSIB VI yang berfokus pada
+          campaign pemasaran digital selama 3 bulan, mencakup
+          data brand, perencanaan campaign, copywriting, dan strategi public speaking.
+        </p>
+
+      {/* TECH STACK */}
+      <div className="flex flex-wrap gap-2 mb-5">
+        <span className="px-3 py-1 text-xs rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
+          Data Science In Media
+        </span>
+
+        <span className="px-3 py-1 text-xs rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
+          Business Development
+        </span>
+
+        <span className="px-3 py-1 text-xs rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
+          Digital Marketing
+        </span>
+
+        <span className="px-3 py-1 text-xs rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
+          Brand Campaign
+        </span>
+
+        <span className="px-3 py-1 text-xs rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
+          Copywriting
+        </span>
+      </div>
+
+      {/* BUTTON */}
+      <motion.a
+        href="https://github.com/Dody21/brand-campaign.git"
+        target="_blank"
+        rel="noreferrer"
+        whileHover={{ x: 5 }}
+        transition={{ duration: 0.2 }}
+        className="
+          inline-flex items-center gap-2
+          text-cyan-400
+          hover:gap-3
+          transition-all
+          text-sm font-medium
+        "
+      >
+        View Project →
+      </motion.a>
+     </div>
+    </motion.div>
 
       {/* Project 4 - Obesity Classification */}
       <motion.div
-        className="bg-black/40 rounded-xl overflow-hidden shadow-lg cursor-pointer backdrop-blur-sm"
-        whileHover={{ 
-          y: -8, 
-          scale: 1.02, 
-          boxShadow: "0px 0px 30px rgba(0,255,255,0.6)"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        whileHover={{
+          y: -6,
+          boxShadow: "0px 0px 25px rgba(34,211,238,0.35)",
         }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="
+          group relative
+          bg-neutral-900/60
+          backdrop-blur-md
+          border border-cyan-400/20
+          rounded-2xl
+          overflow-hidden
+          transition duration-300
+          hover:border-cyan-400
+        "
       >
-        <div className="w-full aspect-video overflow-hidden">
-          <motion.img
-            src="/projects/distribusi_tingkat_obesitas.png"
-            alt="Obesity Classification"
-            className="w-full h-full object-cover"
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.4 }}
-          />
-        </div>
-        <div className="p-6">
-          <h3 className="font-semibold text-xl mb-3">
-            Obesity Classification – Machine Learning
-          </h3>
-          <p className="text-gray-400 mb-4 text-sm leading-relaxed">
-            Developed a machine learning model to classify obesity levels using 
-            classification algorithms. Includes data preprocessing, model training, 
-            evaluation, and visualization to support healthcare-related decision making.
-          </p>
-          <motion.a
-            href="https://github.com/Dody21/klasifikasi-obesitas.git"
-            className="text-cyan-400 text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all"
-            target="_blank"
-            rel="noreferrer"
-            whileHover={{ x: 5 }}
-          >
-            View Project →
-          </motion.a>
-        </div>
-      </motion.div>
+
+      {/* Glow Hover */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent blur-2xl"></div>
+      </div>
+
+      {/* IMAGE */}
+      <div className="w-full aspect-video overflow-hidden">
+        <img
+          src="/projects/distribusi_tingkat_obesitas.png"
+          alt="Obesity Classification"
+          className="w-full h-full object-cover transition duration-500 hover:scale-105"
+        />
+      </div>
+
+      {/* CONTENT */}
+      <div className="p-6">
+        <h3 className="text-xl font-semibold text-cyan-400 mb-3">
+          Obesity Classification – Machine Learning
+        </h3>
+
+        <p className="text-sm text-gray-300 leading-relaxed mb-5">
+          Mengembangkan model machine learning untuk
+          mengklasifikasikan tingkat obesitas melalui
+          preprocessing data, training model, evaluasi,
+          dan visualisasi data kesehatan.
+        </p>
+
+      {/* TECH STACK */}
+      <div className="flex flex-wrap gap-2 mb-5">
+        <span className="px-3 py-1 text-xs rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
+          Machine Learning
+        </span>
+
+        <span className="px-3 py-1 text-xs rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
+          Classification
+        </span>
+
+        <span className="px-3 py-1 text-xs rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
+          Python
+        </span>
+      </div>
+
+      {/* BUTTON */}
+      <motion.a
+        href="https://github.com/Dody21/klasifikasi-obesitas.git"
+        target="_blank"
+        rel="noreferrer"
+        whileHover={{ x: 5 }}
+        transition={{ duration: 0.2 }}
+        className="
+          inline-flex items-center gap-2
+          text-cyan-400
+          hover:gap-3
+          transition-all
+          text-sm font-medium
+        "
+      >
+        View Project →
+      </motion.a>
+     </div>
+    </motion.div>
 
       {/* Project 5 - Java OOP POS */}
       <motion.div
-        className="bg-black/40 rounded-xl overflow-hidden shadow-lg cursor-pointer backdrop-blur-sm"
-        whileHover={{ 
-          y: -8, 
-          scale: 1.02, 
-          boxShadow: "0px 0px 30px rgba(0,255,255,0.6)"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        whileHover={{
+          y: -6,
+          boxShadow: "0px 0px 25px rgba(34,211,238,0.35)",
         }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="
+          group relative
+          bg-neutral-900/60
+          backdrop-blur-md
+          border border-cyan-400/20
+          rounded-2xl
+          overflow-hidden
+          transition duration-300
+          hover:border-cyan-400
+        "
       >
-        <div className="w-full aspect-video overflow-hidden">
-          <motion.img
-            src="/projects/data-pelanggan.png"
-            alt="Java OOP POS"
-            className="w-full h-full object-cover"
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.4 }}
-          />
-        </div>
-        <div className="p-6">
-          <h3 className="font-semibold text-xl mb-3">
-            Java OOP POS – Point of Sale
-          </h3>
-          <p className="text-gray-400 mb-4 text-sm leading-relaxed">
-            Aplikasi kasir berbasis Java OOP dengan fitur manajemen pelanggan, produk, 
-            pesanan, dan nota transaksi. Dibangun menggunakan Java Swing, MySQL, dan 
-            konsep OOP.
-          </p>
-          <motion.a
-            href="https://github.com/Dody21/java-oop-pos.git"
-            className="text-cyan-400 text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all"
-            target="_blank"
-            rel="noreferrer"
-            whileHover={{ x: 5 }}
-          >
-            View Project →
-          </motion.a>
-        </div>
-      </motion.div>
+
+      {/* Glow Hover */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent blur-2xl"></div>
+      </div>
+
+      {/* IMAGE */}
+      <div className="w-full aspect-video overflow-hidden">
+        <img
+          src="/projects/data-pelanggan.png"
+          alt="Java OOP POS"
+          className="w-full h-full object-cover transition duration-500 hover:scale-105"
+        />
+      </div>
+
+      {/* CONTENT */}
+      <div className="p-6">
+        <h3 className="text-xl font-semibold text-cyan-400 mb-3">
+          Java OOP POS – Point of Sale
+        </h3>
+
+        <p className="text-sm text-gray-300 leading-relaxed mb-5">
+          Aplikasi kasir berbasis Java OOP dengan fitur
+          manajemen pelanggan, produk, transaksi,
+          dan nota pembayaran menggunakan Java Swing
+          serta MySQL Database.
+        </p>
+
+      {/* TECH STACK */}
+      <div className="flex flex-wrap gap-2 mb-5">
+        <span className="px-3 py-1 text-xs rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
+          Java
+        </span>
+
+        <span className="px-3 py-1 text-xs rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
+          MySQL
+        </span>
+
+        <span className="px-3 py-1 text-xs rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
+          Java Swing
+        </span>
+      </div>
+
+      {/* BUTTON */}
+      <motion.a
+        href="https://github.com/Dody21/java-oop-pos.git"
+        target="_blank"
+        rel="noreferrer"
+        whileHover={{ x: 5 }}
+        transition={{ duration: 0.2 }}
+        className="
+          inline-flex items-center gap-2
+          text-cyan-400
+          hover:gap-3
+          transition-all
+          text-sm font-medium
+        "
+      >
+        View Project →
+      </motion.a>
+     </div>
+    </motion.div>
+
     </div>
   </div>
 </section>
@@ -1480,11 +1775,14 @@ if (loading) {
       <footer className="py-6 text-center text-gray-500 text-sm border-t border-neutral-800">
         © 2025 Dodi Portfolio. All rights reserved.
         <br />
-          {/* (Visitors) - DISABLE DULU
+          {
+          /* 
+          (Visitors) - DISABLE DULU
           <p className="mt-2 text-xs text-gray-400">
             👁️ {displayVisitors} visitors worldwide
           </p>
-          */}
+          */
+          }
       </footer>
     </div>
   );
