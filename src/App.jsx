@@ -210,6 +210,21 @@ const certificatesData = [
     file: "/certificates/DataScience_Dicoding.pdf",
   },
   {
+    title: "Visualisasi Data Certificate",
+    logo: "/logos/Dicoding.png",
+    file: "/certificates/VisualisasiData.pdf",
+  },
+  {
+    title: "Machine Learning Certificate",
+    logo: "/logos/Dicoding.png",
+    file: "/certificates/MachineLearning.pdf",
+  },
+  {
+    title: "AWS Cloud Certificate",
+    logo: "/logos/Dicoding.png",
+    file: "/certificates/AWS_Cloud.pdf",
+  },
+  {
     title: "SQL Certificate",
     logo: "/logos/Dicoding.png",
     file: "/certificates/SQL_Dicoding.pdf",
