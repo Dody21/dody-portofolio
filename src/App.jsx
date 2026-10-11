@@ -137,6 +137,21 @@ export default function App() {
 
   const experiences = [
   {
+    role: "Visitor",
+    company: "PT Karya Indonesia Cerdas",
+    place: "Gedung Wisma NH Lt. 1, Jakarta Selatan",
+    year: "2026",
+    logo: "/logos/Logo_KIC.png",
+    program: "Internship",
+    desc: [
+      "Mengelola dan memvalidasi database peserta International Healthcare Engineering Forum berdasarkan kategori peserta, institusi, jabatan, bidang, dan status konfirmasi.",
+      "Melaksanakan outreach dan follow up calon peserta melalui platform komunikasi digital serta memantau status komunikasi dan registrasi.",
+      "Mendukung pelaksanaan kegiatan sebagai Usher Area Workshop dalam proses check-in, penyampaian informasi, pengarahan, dan pengelolaan flow peserta.",
+      "Merekap data kehadiran, menyusun laporan kendala area workshop, dan membuat visualisasi data untuk evaluasi kegiatan.",
+    ],
+    // certificate: "/certificates/.pdf",
+  },
+  {
     role: "Pengolah Data dan Monitoring Evaluasi Pelatihan",
     company: "Pusat Pengembangan SDM Perhubungan Udara",
     place: "Komplek Bandar Udara Budiarto, Kab Tangerang, Banten",
@@ -184,6 +199,16 @@ export default function App() {
 
 const certificatesData = [
   {
+    title: "Badan Nasional Sertifikasi Profesi Operator Komputer Certificate",
+    logo: "/logos/BNSP.png",
+    file: "/certificates/BNSP_OperatorKomputer.pdf",
+  },
+  {
+    title: "Pengolah Data dan Monitoring Evaluasi Pelatihan Certificate",
+    logo: "/logos/Perhubungan.png",
+    file: "/certificates/PPSDMPU.pdf",
+  },
+  {
     title: "Computer Algorithm Competency Certificate",
     logo: "/logos/UBL.png",
     file: "/certificates/Algoritma.pdf",
@@ -198,12 +223,6 @@ const certificatesData = [
     logo: "/logos/kampusmerdeka.png",
     file: "/certificates/SI.pdf",
   },
-  {
-    title: "Pengolah Data dan Monitoring Evaluasi Pelatihan Certificate",
-    logo: "/logos/Perhubungan.png",
-    file: "/certificates/PPSDMPU.pdf",
-  },
-
   {
     title: "Data Science Certificate",
     logo: "/logos/Dicoding.png",
@@ -805,23 +824,29 @@ if (loading) {
 
       {/* Dokumen */}
       <div className="mt-4 flex gap-3">
-        <a
-          href="/documents/Ijazah.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1 text-center border border-cyan-400 text-cyan-400 py-2 rounded-lg hover:bg-cyan-400 hover:text-neutral-900 transition text-sm"
+        <button
+          onClick={() =>
+            setSelectedCert({
+              title: "Bachelor's Degree",
+              file: "/documents/Ijazah.pdf",
+            })
+          }
+            className="flex-1 text-center border border-cyan-400 text-cyan-400 py-2 rounded-lg hover:bg-cyan-400 hover:text-neutral-900 transition text-sm"
         >
           🎓 Bachelor's
-        </a>
+        </button>
 
-        <a
-          href="/documents/Transkrip_Nilai.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1 text-center border border-cyan-400 text-cyan-400 py-2 rounded-lg hover:bg-cyan-400 hover:text-neutral-900 transition text-sm"
+        <button
+          onClick={() =>
+            setSelectedCert({
+              title: "Academic Transcript",
+              file: "/documents/Transkrip_Nilai.pdf",
+            })
+          }
+            className="flex-1 text-center border border-cyan-400 text-cyan-400 py-2 rounded-lg hover:bg-cyan-400 hover:text-neutral-900 transition text-sm"
         >
           📄 Transcript
-        </a>
+        </button>
       </div>
       </div>
     </div>
@@ -837,10 +862,10 @@ if (loading) {
     >
       <h2 className="text-3xl font-bold mb-8">About Me</h2>
       <p className="text-gray-200 leading-relaxed max-w-3xl mb-6 text-justify">
-        I am a <span className="text-cyan-400 font-medium">fresh graduate from Universitas Budi Luhur, 
-        Faculty of Information Technology, majoring in Information Systems with a specialization in Data Science.</span> {" "}
-        Throughout my academic journey, I have actively explored various <span className="text-cyan-400 font-medium">data mining 
-        techniques</span> to analyze consumer behavior and brand data, uncover hidden patterns, and design product bundling strategies 
+        I am an <span className="text-cyan-400 font-medium">Information Systems graduate from Universitas Budi Luhur, 
+        Faculty of Information Technology, specializing in Data Science.</span> {" "}
+        Throughout my academic journey, I have actively explored various <span className="text-cyan-400 font-medium">data mining
+        techniques</span> to analyze consumer behavior and brand data, uncover hidden patterns, and design product bundling strategies
         that integrate data science approaches with practical business needs.
       </p>
       <p className="text-gray-200 leading-relaxed max-w-3xl mb-6 text-justify">
@@ -1598,7 +1623,7 @@ if (loading) {
       </div>
 
       {/* 🔥 BADGE FEATURED */}
-      {cert.title.includes("Data Science") && (
+      {cert.title.includes("Badan Nasional Sertifikasi Profesi") && (
         <span className="absolute top-2 right-2 text-xs bg-cyan-400 text-black px-2 py-1 rounded z-20">
           Featured
         </span>
