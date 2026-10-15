@@ -149,7 +149,7 @@ export default function App() {
       "Mendukung pelaksanaan kegiatan sebagai Usher Area Workshop dalam proses check-in, penyampaian informasi, pengarahan, dan pengelolaan flow peserta.",
       "Merekap data kehadiran, menyusun laporan kendala area workshop, dan membuat visualisasi data untuk evaluasi kegiatan.",
     ],
-    // certificate: "/certificates/.pdf",
+    certificate: "/certificates/Sertifikat_Intern_PTPI.pdf"
   },
   {
     role: "Pengolah Data dan Monitoring Evaluasi Pelatihan",
